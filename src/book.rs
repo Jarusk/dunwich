@@ -1,16 +1,22 @@
-﻿
-/// The book text has been modified with a hash-mark delimiter.
+﻿/// The book text has been modified with a hash-mark delimiter.
 /// This methos simply returns the core of the book with the
 /// license and meta info stripped (title, chapter markers, etc.)
 pub fn get_book() -> Vec<&'static str> {
-  let chunks: Vec<&str> = BOOK_TEXT.split("######").collect();
-  return chunks[1].split("\n\n")
-                  .filter(|x| x.len() >= 4)
-                  .collect();
+    let chunks: Vec<&str> = BOOK_TEXT.split("######").collect();
+    chunks[1].split("\n\n").filter(|x| x.len() >= 4).collect()
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-const BOOK_TEXT:&'static str = "
+    #[test]
+    fn book_length() {
+        assert_eq!(get_book().len(), 150);
+    }
+}
+
+const BOOK_TEXT: &str = "
 The Project Gutenberg EBook of The Dunwich Horror, by H. P. Lovecraft
 
 This eBook is for the use of anyone anywhere in the United States and most
