@@ -1,4 +1,4 @@
-﻿/// The book text has been modified with a hash-mark delimiter.
+/// The book text has been modified with a hash-mark delimiter.
 /// This methos simply returns the core of the book with the
 /// license and meta info stripped (title, chapter markers, etc.)
 pub fn get_book() -> Vec<&'static str> {

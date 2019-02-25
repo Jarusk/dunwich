@@ -3,5 +3,7 @@ name = "dunwich"
 version = "0.1.0"
 authors = ["Matt Yaraskavitch <yaraskavitch.matt@gmail.com>"]
 edition = "2018"
+description = "A Lovecraftian network throughput tester"
 
 [dependencies]
+clap = "2.32.0"
