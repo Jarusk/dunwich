@@ -1,4 +1,16 @@
-﻿pub const BOOK_TEXT:&'static str = "
+﻿
+/// The book text has been modified with a hash-mark delimiter.
+/// This methos simply returns the core of the book with the
+/// license and meta info stripped (title, chapter markers, etc.)
+pub fn get_book() -> Vec<&'static str> {
+  let chunks: Vec<&str> = BOOK_TEXT.split("######").collect();
+  return chunks[1].split("\n\n")
+                  .filter(|x| x.len() >= 4)
+                  .collect();
+}
+
+
+const BOOK_TEXT:&'static str = "
 The Project Gutenberg EBook of The Dunwich Horror, by H. P. Lovecraft
 
 This eBook is for the use of anyone anywhere in the United States and most
@@ -37,6 +49,7 @@ Distributed Proofreading Team at http://www.pgdp.net
 
                         by H. P. LOVECRAFT
 
+######
 
      \"Gorgons, and Hydras, and Chimeras--dire stories of Celæno and
      the Harpies--may reproduce themselves in the brain of
@@ -1748,7 +1761,7 @@ ask how Wilbur called it out of the air. He didn't call it out. _It was
 his twin brother, but it looked more like the father than he did._\"
 
 
-
+######
 
 
 End of the Project Gutenberg EBook of The Dunwich Horror, by H. P. Lovecraft

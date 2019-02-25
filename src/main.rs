@@ -1,7 +1,10 @@
 mod book;
 
 fn main() {
-    println!("Hello, world!");
 
-    println!("{}", &book::BOOK_TEXT);
+    let book = book::get_book();
+    
+    for x in book {
+        println!("{}", &x);
+    }
 }
