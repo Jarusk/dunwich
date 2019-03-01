@@ -5,6 +5,7 @@ use std::net::SocketAddr;
 
 mod client;
 mod server;
+mod book;
 
 fn main() {
     let matches = App::new(crate_name!())

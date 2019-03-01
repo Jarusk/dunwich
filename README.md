@@ -1,4 +1,6 @@
-# dunwich
+# dunwich 
+[![Build Status](https://travis-ci.org/Jarusk/dunwich.svg?branch=rusty)](https://travis-ci.org/Jarusk/dunwich)
+
 A client-server stress-tester for Network adapters.
 Basically, initialize the server on one machine and the client on another machine(s)
 
