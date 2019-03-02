@@ -1,11 +1,13 @@
 extern crate clap;
 
 use clap::{crate_authors, crate_description, crate_name, crate_version, App, Arg};
-use std::net::SocketAddr;
+use std::net::{IpAddr, SocketAddr};
 
 mod client;
 mod server;
 mod book;
+
+const DEFAULT_PORT: u16 = 5201;
 
 fn main() {
     let matches = App::new(crate_name!())
@@ -47,7 +49,7 @@ fn main() {
     if matches.is_present("client") {
         handle_client(matches.value_of("client").unwrap_or(""));
     } else if matches.is_present("server") {
-        handle_server(matches.value_of("port").unwrap_or("5201"));
+        handle_server(matches.value_of("port").unwrap_or(&format!("{}", DEFAULT_PORT)));
     }
 }
 
@@ -64,7 +66,11 @@ fn handle_server(port: &str) {
 }
 
 fn handle_client(address: &str) {
-    let address_parsed = match address.trim().parse::<SocketAddr>() {
+    let mut tmp = address.trim().to_string();
+    if !address.contains(":") {
+        tmp  = format!("{}:{}", tmp, DEFAULT_PORT);
+    }
+    let address_parsed = match tmp.parse::<SocketAddr>() {
         Ok(e) => e,
         Err(_e) => {
             eprintln!("Exiting: invalid ip:port address ({})", &address);
