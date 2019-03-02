@@ -1,5 +1,5 @@
-use std::net::SocketAddr;
 use crate::book;
+use std::net::SocketAddr;
 
 pub struct DunwichClient {
     address: SocketAddr,
