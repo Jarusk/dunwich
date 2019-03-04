@@ -7,3 +7,4 @@ description = "A Lovecraftian network throughput tester"
 
 [dependencies]
 clap = "2.32.0"
+rand = "0.6.5"

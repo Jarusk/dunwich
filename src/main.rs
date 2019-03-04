@@ -1,6 +1,7 @@
 extern crate clap;
 
 use clap::{crate_authors, crate_description, crate_name, crate_version, App, Arg};
+use std::process;
 use std::net::SocketAddr;
 
 mod book;
@@ -62,7 +63,7 @@ fn handle_server(port: &str) {
         Ok(x) => x,
         Err(_e) => {
             eprintln!("Exiting: Invalid port specified ({})", &port);
-            std::process::exit(1);
+            process::exit(1);
         }
     };
 
@@ -78,7 +79,7 @@ fn handle_client(address: &str) {
         Ok(e) => e,
         Err(_e) => {
             eprintln!("Exiting: invalid ip:port address ({})", &address);
-            std::process::exit(1);
+            process::exit(1);
         }
     };
 
