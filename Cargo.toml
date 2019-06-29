@@ -6,5 +6,5 @@ edition = "2018"
 description = "A Lovecraftian network throughput tester"
 
 [dependencies]
-clap = "2.32.0"
-rand = "0.6.5"
+clap = "2.33"
+rand = "0.7"
