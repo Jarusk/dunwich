@@ -1,31 +1,34 @@
-use crate::book;
 use crate::constants;
 
+use std::error::Error;
 use std::io::prelude::*;
 use std::net::{SocketAddr, TcpStream};
-use std::str;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::Duration;
 
+static CLIENT_COUNT: AtomicUsize = AtomicUsize::new(0);
+
 pub struct DunwichClient {
-    address: SocketAddr,
-    content: Vec<&'static str>
+    id: usize,
+    address: SocketAddr
 }
 
 impl DunwichClient {
     pub fn new(address: SocketAddr) -> DunwichClient {
-        DunwichClient { address: address , content: book::get_book()}
+        DunwichClient { id: CLIENT_COUNT.fetch_add(1, Ordering::Relaxed), address: address }
     }
 
     pub fn run(&self) {
-        println!("Launching client connecting to {:?}", self.address);
+        println!("Launching client {} connecting to {:?}", self.id, self.address);
 
         match TcpStream::connect_timeout(&self.address, Duration::new(constants::DEFAULT_CLIENT_TIMEOUT_SECONDS, 0)) {
             Ok(s) => {
                 println!("Connected to server: {}", self.address);
                 self.handle_connection(s);
+                println!("")
             }
             Err(e) => {
-                println!("Error in conneciton: {}", e);
+                println!("Error in connection: {}", e.description());
             }
         }
     }

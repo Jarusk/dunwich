@@ -1,6 +1,6 @@
 extern crate clap;
 
-use clap::{crate_authors, crate_description, crate_name, crate_version, App, Arg};
+use clap::{ crate_description, crate_name, crate_version, App, Arg };
 use std::process;
 use std::net::SocketAddr;
 
@@ -12,7 +12,6 @@ mod constants;
 fn main() {
     let matches = App::new(crate_name!())
         .version(crate_version!())
-        .author(crate_authors!())
         .about(crate_description!())
         .arg(
             Arg::with_name("client")
@@ -21,7 +20,8 @@ fn main() {
                 .value_name("HOSTNAME")
                 .help("Run in client mode with server at HOSTNAME")
                 .takes_value(true)
-                .required_unless("server"),
+                .required_unless("server")
+                .conflicts_with("server"),
         )
         .arg(
             Arg::with_name("server")
@@ -29,7 +29,8 @@ fn main() {
                 .long("server")
                 .help("Run in server mode")
                 .takes_value(false)
-                .required_unless("client"),
+                .required_unless("client")
+                .conflicts_with("client"),
         )
         .arg(
             Arg::with_name("port")
