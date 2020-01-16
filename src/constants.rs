@@ -1,0 +1,2 @@
+pub const DEFAULT_PORT: u16 = 5201;
+pub const DEFAULT_CLIENT_TIMEOUT_SECONDS: u64 = 5;

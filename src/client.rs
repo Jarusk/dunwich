@@ -1,4 +1,5 @@
 use crate::book;
+use crate::constants;
 
 use std::io::prelude::*;
 use std::net::{SocketAddr, TcpStream};
@@ -18,7 +19,7 @@ impl DunwichClient {
     pub fn run(&self) {
         println!("Launching client connecting to {:?}", self.address);
 
-        match TcpStream::connect_timeout(&self.address, Duration::new(5, 0)) {
+        match TcpStream::connect_timeout(&self.address, Duration::new(constants::DEFAULT_CLIENT_TIMEOUT_SECONDS, 0)) {
             Ok(s) => {
                 println!("Connected to server: {}", self.address);
                 self.handle_connection(s);

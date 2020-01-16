@@ -7,8 +7,7 @@ use std::net::SocketAddr;
 mod book;
 mod client;
 mod server;
-
-const DEFAULT_PORT: u16 = 5201;
+mod constants;
 
 fn main() {
     let matches = App::new(crate_name!())
@@ -53,7 +52,7 @@ fn main() {
         handle_server(
             matches
                 .value_of("port")
-                .unwrap_or(&format!("{}", DEFAULT_PORT)),
+                .unwrap_or(&format!("{}", constants::DEFAULT_PORT)),
         );
     }
 }
@@ -73,7 +72,7 @@ fn handle_server(port: &str) {
 fn handle_client(address: &str) {
     let mut tmp = address.trim().to_string();
     if !address.contains(':') {
-        tmp = format!("{}:{}", tmp, DEFAULT_PORT);
+        tmp = format!("{}:{}", tmp, constants::DEFAULT_PORT);
     }
     let address_parsed = match tmp.parse::<SocketAddr>() {
         Ok(e) => e,
