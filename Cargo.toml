@@ -1,0 +1,11 @@
+[package]
+name = "dunwich"
+version = "0.0.1"
+edition = "2018"
+authors = ["Matt Yaraskavitch <yaraskavitch.matt@gmail.com>"]
+description = "A Lovecraftian network throughput tester"
+
+[dependencies]
+clap = "2.33"
+rand = "0.7"
+nom = "6.0"
