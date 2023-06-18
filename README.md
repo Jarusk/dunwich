@@ -1,5 +1,10 @@
-# dunwich
-A client-server stress-tester for Network adapters.
-Basically, initialize the server on one machine and the client on another machine(s)
+# Dunwich
 
-The utility will make many, many requests to rettrieve arbitrary chunks of a given book and make sure that the data returned is that requested.
+A data-centre focused load tester for saturating high-throughput networks. On 20G+ networks, standard tools such as iperf can become CPU bound. Dunwich aims to leverage the concurrent nature of Go to bypass these limitations.
+
+## Why "Dunwich"?
+Most load testing apps simulate traffic using generated content of uniform size. Dunwich, on the other hands, aim to offer a more realistic load simulation by sharing paragraphs of H.P. Lovecraft's work _The Dunwich Horror_ (pulled from [Project Gutenberg](https://www.gutenberg.org/ebooks/50133)).
+
+## Development Setup
+1. Make sure Go 1.20+ is installed.
+
