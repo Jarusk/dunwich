@@ -1,9 +1,13 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 
+	"github.com/Jarusk/dunwich/pkg/cluster"
 	"github.com/Jarusk/dunwich/pkg/config"
 	log "github.com/sirupsen/logrus"
 )
@@ -29,6 +33,20 @@ func setLogLevel(cfg *config.Config) {
 	log.Infof("set log level to '%s'", lvl.String())
 }
 
+func handleShutdown() {
+	stop := make(chan os.Signal, 1)
+
+	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
+
+	log.Info("finished setup")
+
+	caught := <-stop
+
+	log.WithFields(log.Fields{
+		"signal": caught.String(),
+	}).Info("caught signal, exiting.")
+}
+
 func main() {
 	log.Info("starting Dunwich")
 
@@ -44,4 +62,19 @@ func main() {
 	}).Info("loaded config")
 
 	setLogLevel(cfg)
+
+	// externalize
+	joinNode := flag.String("join", "", "the address:port to point to")
+	flag.Parse()
+
+	bootstrapNodes := make([]string, 0, 1)
+
+	if *joinNode != "" {
+		bootstrapNodes = append(bootstrapNodes, *joinNode)
+	}
+
+	cluster := cluster.Cluster{}
+	cluster.JoinCluster(cfg.Memberlist.Port, bootstrapNodes)
+
+	handleShutdown()
 }
