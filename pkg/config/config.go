@@ -9,6 +9,9 @@ type Config struct {
 	Logger struct {
 		Level string `fig:"level" default:"info"`
 	}
+	Memberlist struct {
+		Port int `fig:"port" default:"7946"`
+	}
 }
 
 func LoadConfig() (*Config, error) {

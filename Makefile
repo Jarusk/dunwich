@@ -1,6 +1,7 @@
 SOURCES := ./...
 BINARY := dunwich
 BINDIR := .
+COVERAGE_REPORT := coverage.out
 
 FLAGS := CGO_ENABLED=0
 
@@ -13,12 +14,12 @@ tooling:
 .PHONY: coverage
 coverage: test
 	@echo "Generating coverage report"
-	go tool cover -html=coverage.out
+	go tool cover -html=$(COVERAGE_REPORT)
 
 .PHONY: check-coverage
 check-coverage: test
 	@echo "Get total coverage"
-	$(eval COVERED=$(shell go tool cover -func coverage.out | grep total | awk '{print substr($$3, 1, length($$3)-1)}'))
+	$(eval COVERED=$(shell go tool cover -func $(COVERAGE_REPORT) | grep total | awk '{print substr($$3, 1, length($$3)-1)}'))
 	@if [ "80.0" != "$(word 1, $(sort 80.0 $(COVERED)))" ]; then \
 		echo "Test coverage (${COVERED}%) is less than 80%";\
 		exit 1;\
@@ -32,8 +33,8 @@ all-noclean: build fmt lint test
 
 .PHONY: clean
 clean:
-	@echo "Removing $(BINARY)"
-	@rm -f $(BINARY)
+	@echo "Removing $(BINARY) and coverage report"
+	@rm -f $(BINARY) $(COVERAGE_REPORT)
 	@echo "Cleaning build and test cache"
 	@go clean -cache -testcache
 
@@ -60,7 +61,12 @@ run:
 .PHONY: test
 test:
 	@echo "Running tests"
-	${FLAGS} CGO_ENABLED=1 go test -v -cover -coverprofile=coverage.out -race ${SOURCES}
+	${FLAGS} CGO_ENABLED=1 go test -v -cover -coverprofile=$(COVERAGE_REPORT) -race ${SOURCES}
+
+.PHONY: tidy
+tidy:
+	@echo "Running mod tidy"
+	${FLAGS} go mod tidy
 
 .PHONY: --internal-update
 --internal-update:
@@ -68,11 +74,9 @@ test:
 	${FLAGS} go get -d -u -t ${SOURCES}
 
 .PHONY: update
-update: --internal-update vendor
+update: --internal-update vendor tidy
 
 .PHONY: vendor
 vendor:
-	@echo "Running mod tidy and mod vendor"
-	${FLAGS} go mod tidy
+	@echo "Running mod vendor"
 	${FLAGS} go mod vendor
-
