@@ -74,7 +74,7 @@ tidy:
 	${FLAGS} go get -d -u -t ${SOURCES}
 
 .PHONY: update
-update: --internal-update vendor
+update: --internal-update vendor tidy
 
 .PHONY: vendor
 vendor:
