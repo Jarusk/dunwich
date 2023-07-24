@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"os/signal"
@@ -10,6 +9,7 @@ import (
 	"github.com/Jarusk/dunwich/pkg/cluster"
 	"github.com/Jarusk/dunwich/pkg/config"
 	log "github.com/sirupsen/logrus"
+	"github.com/urfave/cli/v2"
 )
 
 // init only needs to setup logrus currently
@@ -19,18 +19,6 @@ func init() {
 	})
 	log.SetLevel(log.DebugLevel)
 	log.SetOutput(os.Stdout)
-}
-
-func setLogLevel(cfg *config.Config) {
-	lvl, err := log.ParseLevel(cfg.Logger.Level)
-	if err != nil {
-		log.WithFields(log.Fields{
-			"error": err,
-		}).Fatal("failed to parse log level")
-	}
-
-	log.SetLevel(lvl)
-	log.Infof("set log level to '%s'", lvl.String())
 }
 
 func handleShutdown() {
@@ -48,33 +36,34 @@ func handleShutdown() {
 }
 
 func main() {
-	log.Info("starting Dunwich")
+	log.Trace("starting Dunwich")
 
-	cfg, err := config.LoadConfig()
-	if err != nil {
-		log.WithFields(log.Fields{
-			"error": err,
-		}).Fatal("failed to load config")
+	cfg := config.NewConfig()
+
+	app := &cli.App{
+		Name:                 "dunwich",
+		Usage:                "A next generation network load tester",
+		Version:              "0.0.0",
+		EnableBashCompletion: true,
+		Flags:                config.BuildFlags(&cfg),
+		Suggest:              true,
+		Action: func(ctx *cli.Context) error {
+			log.SetLevel(cfg.Logger.Level)
+			log.Infof("set log level to '%s'", cfg.Logger.Level.String())
+
+			log.WithFields(log.Fields{
+				"config": fmt.Sprintf("%+v", cfg),
+			}).Debug("loaded config")
+
+			cluster := cluster.Cluster{}
+			cluster.JoinCluster(cfg.Memberlist.Port, cfg.Memberlist.JoinNodes)
+
+			handleShutdown()
+			return nil
+		},
 	}
 
-	log.WithFields(log.Fields{
-		"config": fmt.Sprintf("%+v", cfg),
-	}).Info("loaded config")
-
-	setLogLevel(cfg)
-
-	// externalize
-	joinNode := flag.String("join", "", "the address:port to point to")
-	flag.Parse()
-
-	bootstrapNodes := make([]string, 0, 1)
-
-	if *joinNode != "" {
-		bootstrapNodes = append(bootstrapNodes, *joinNode)
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
 	}
-
-	cluster := cluster.Cluster{}
-	cluster.JoinCluster(cfg.Memberlist.Port, bootstrapNodes)
-
-	handleShutdown()
 }

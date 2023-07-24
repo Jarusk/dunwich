@@ -1,6 +1,8 @@
 package cluster
 
 import (
+	"net/netip"
+
 	"github.com/hashicorp/memberlist"
 
 	log "github.com/sirupsen/logrus"
@@ -10,7 +12,7 @@ type Cluster struct {
 	ml *memberlist.Memberlist
 }
 
-func (c Cluster) JoinCluster(listenPort int, bootstrapNodes []string) {
+func (c Cluster) JoinCluster(listenPort int, bootstrapNodes []netip.AddrPort) {
 
 	mlConfig := memberlist.DefaultLocalConfig()
 	mlConfig.BindPort = listenPort
@@ -27,7 +29,7 @@ func (c Cluster) JoinCluster(listenPort int, bootstrapNodes []string) {
 
 	if len(bootstrapNodes) > 0 {
 		log.Debugf("attempting to join via %v", bootstrapNodes)
-		_, err := c.ml.Join(bootstrapNodes)
+		_, err := c.ml.Join(nodeListToStringList(bootstrapNodes))
 		if err != nil {
 			log.WithFields(log.Fields{
 				"err": err,
@@ -36,4 +38,15 @@ func (c Cluster) JoinCluster(listenPort int, bootstrapNodes []string) {
 	} else {
 		log.Debug("no join node set, acting as bootstrap")
 	}
+}
+
+func nodeListToStringList(nodes []netip.AddrPort) []string {
+	nodeStringList := []string{}
+
+	for _, v := range nodes {
+		v := v
+		nodeStringList = append(nodeStringList, v.String())
+	}
+
+	return nodeStringList
 }
