@@ -48,5 +48,4 @@ go.work
 ###
 # Custom
 ###
-dunwich
-!dunwich/*
+/dunwich
