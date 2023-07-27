@@ -1,6 +1,9 @@
 # github.com/armon/go-metrics v0.4.1
 ## explicit; go 1.12
 github.com/armon/go-metrics
+# github.com/carlmjohnson/versioninfo v0.22.4
+## explicit; go 1.16
+github.com/carlmjohnson/versioninfo
 # github.com/cpuguy83/go-md2man/v2 v2.0.2
 ## explicit; go 1.11
 github.com/cpuguy83/go-md2man/v2/md2man

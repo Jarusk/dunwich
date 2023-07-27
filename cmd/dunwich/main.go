@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"runtime/debug"
 	"syscall"
 
 	"github.com/Jarusk/dunwich/pkg/cluster"
 	"github.com/Jarusk/dunwich/pkg/config"
+	"github.com/carlmjohnson/versioninfo"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
@@ -39,12 +39,10 @@ func main() {
 
 	cfg := config.NewConfig()
 
-	info, _ := debug.ReadBuildInfo()
-
 	app := &cli.App{
 		Name:                 "dunwich",
 		Usage:                "A next generation network load tester",
-		Version:              info.Main.Version,
+		Version:              versioninfo.Short(),
 		EnableBashCompletion: true,
 		Flags:                config.BuildFlags(&cfg),
 		Suggest:              true,
