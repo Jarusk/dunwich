@@ -21,9 +21,7 @@ func init() {
 	log.SetOutput(os.Stdout)
 }
 
-func handleShutdown() {
-	stop := make(chan os.Signal, 1)
-
+func handleShutdown(stop chan os.Signal) {
 	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
 
 	log.Info("finished setup")
@@ -58,7 +56,7 @@ func main() {
 			cluster := cluster.Cluster{}
 			cluster.JoinCluster(cfg.Memberlist.Port, cfg.Memberlist.JoinNodes)
 
-			handleShutdown()
+			handleShutdown(make(chan os.Signal, 1))
 			return nil
 		},
 	}
