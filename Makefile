@@ -48,6 +48,11 @@ fmt:
 	@echo "Running gofmt"
 	${FLAGS} gofmt -w .
 
+.PHONY: install
+install:
+	@echo "Installing ${BINARY} to $(shell go env GOPATH)/bin"
+	${FLAGS} go install  -buildvcs=true ${SOURCES}
+
 .PHONY: lint
 lint:
 	@echo "Running lint"

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"syscall"
 
 	"github.com/Jarusk/dunwich/pkg/cluster"
@@ -38,10 +39,12 @@ func main() {
 
 	cfg := config.NewConfig()
 
+	info, _ := debug.ReadBuildInfo()
+
 	app := &cli.App{
 		Name:                 "dunwich",
 		Usage:                "A next generation network load tester",
-		Version:              "0.0.0",
+		Version:              info.Main.Version,
 		EnableBashCompletion: true,
 		Flags:                config.BuildFlags(&cfg),
 		Suggest:              true,
