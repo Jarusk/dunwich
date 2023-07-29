@@ -2,6 +2,8 @@
 
 A data-centre focused load tester for saturating high-throughput networks. On 20G+ networks, standard tools such as iperf can become CPU bound. Dunwich aims to leverage the concurrent nature of Go to bypass these limitations.
 
+**NOT IN A FUNCTIONAL STATE YET**
+
 ## Why "Dunwich"?
 Most load testing apps simulate traffic using generated content of uniform size. Dunwich, on the other hands, aim to offer a more realistic load simulation by sharing paragraphs of H.P. Lovecraft's work _The Dunwich Horror_ (pulled from [Project Gutenberg](https://www.gutenberg.org/ebooks/50133)).
 
