@@ -22,20 +22,24 @@ func init() {
 	log.SetOutput(os.Stdout)
 }
 
-func handleShutdown(stop chan os.Signal) {
-	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
-
+func handleShutdown() {
 	log.Info("finished setup")
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
 
 	caught := <-stop
 
 	log.WithFields(log.Fields{
 		"signal": caught.String(),
-	}).Info("caught signal, exiting.")
+	}).Info("caught signal, handling shutdown.")
+
+	// Cleanup logic goes here.
 }
 
-func main() {
-	log.Trace("starting Dunwich")
+func run(args []string) {
+
+	log.Tracef("recevied args %v", args)
 
 	cfg := config.NewConfig()
 
@@ -57,12 +61,18 @@ func main() {
 			cluster := cluster.Cluster{}
 			cluster.JoinCluster(cfg.Memberlist.Port, cfg.Memberlist.JoinNodes)
 
-			handleShutdown(make(chan os.Signal, 1))
+			handleShutdown()
+
 			return nil
 		},
 	}
 
-	if err := app.Run(os.Args); err != nil {
+	if err := app.Run(args); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func main() {
+	log.Trace("starting Dunwich")
+	run(os.Args)
 }
