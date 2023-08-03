@@ -12,12 +12,12 @@ tooling:
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 .PHONY: coverage
-coverage: test
+coverage: test-coverage
 	@echo "Generating coverage report"
 	go tool cover -html=$(COVERAGE_REPORT)
 
 .PHONY: check-coverage
-check-coverage: test
+check-coverage: test-coverage
 	@echo "Get total coverage"
 	$(eval COVERED=$(shell go tool cover -func $(COVERAGE_REPORT) | grep total | awk '{print substr($$3, 1, length($$3)-1)}'))
 	@if [ "80.0" != "$(word 1, $(sort 80.0 $(COVERED)))" ]; then \
@@ -65,6 +65,11 @@ run:
 
 .PHONY: test
 test:
+	@echo "Running tests"
+	${FLAGS} CGO_ENABLED=1 go test -v -race ${SOURCES}
+
+.PHONY: test-coverage
+test-coverage:
 	@echo "Running tests"
 	${FLAGS} CGO_ENABLED=1 go test -v -cover -coverprofile=$(COVERAGE_REPORT) -race ${SOURCES}
 
