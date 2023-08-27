@@ -26,10 +26,10 @@ check-coverage: test-coverage
 	fi
 
 .PHONY: all
-all: clean build fmt lint test
+all: clean fmt lint test build
 
 .PHONY: all-noclean
-all-noclean: build fmt lint test
+all-noclean: fmt lint test build
 
 .PHONY: clean
 clean:
