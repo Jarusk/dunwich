@@ -754,18 +754,17 @@ func (d *bincDecDriver) decodeNaked() (v interface{}, vt valueType, decodeFurthe
 
 //------------------------------------
 
-// BincHandle is a Handle for the Binc Schema-Free Encoding Format
-// defined at https://github.com/ugorji/binc .
+//BincHandle is a Handle for the Binc Schema-Free Encoding Format
+//defined at https://github.com/ugorji/binc .
 //
-// BincHandle currently supports all Binc features with the following EXCEPTIONS:
-//   - only integers up to 64 bits of precision are supported.
-//     big integers are unsupported.
-//   - Only IEEE 754 binary32 and binary64 floats are supported (ie Go float32 and float64 types).
-//     extended precision and decimal IEEE 754 floats are unsupported.
-//   - Only UTF-8 strings supported.
-//     Unicode_Other Binc types (UTF16, UTF32) are currently unsupported.
-//
-// Note that these EXCEPTIONS are temporary and full support is possible and may happen soon.
+//BincHandle currently supports all Binc features with the following EXCEPTIONS:
+//  - only integers up to 64 bits of precision are supported.
+//    big integers are unsupported.
+//  - Only IEEE 754 binary32 and binary64 floats are supported (ie Go float32 and float64 types).
+//    extended precision and decimal IEEE 754 floats are unsupported.
+//  - Only UTF-8 strings supported.
+//    Unicode_Other Binc types (UTF16, UTF32) are currently unsupported.
+//Note that these EXCEPTIONS are temporary and full support is possible and may happen soon.
 type BincHandle struct {
 	BasicHandle
 }

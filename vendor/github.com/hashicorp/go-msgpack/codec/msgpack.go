@@ -10,11 +10,12 @@ without caring about the type.
 
 For compatibility with behaviour of msgpack-c reference implementation:
   - Go intX (>0) and uintX
-    IS ENCODED AS
+       IS ENCODED AS
     msgpack +ve fixnum, unsigned
   - Go intX (<0)
-    IS ENCODED AS
+       IS ENCODED AS
     msgpack -ve fixnum, signed
+
 */
 package codec
 
@@ -667,7 +668,7 @@ func (d *msgpackDecDriver) decodeExt(verifyTag bool, tag byte) (xtag byte, xbs [
 
 //--------------------------------------------------
 
-// MsgpackHandle is a Handle for the Msgpack Schema-Free Encoding Format.
+//MsgpackHandle is a Handle for the Msgpack Schema-Free Encoding Format.
 type MsgpackHandle struct {
 	BasicHandle
 
