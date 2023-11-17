@@ -37,7 +37,7 @@ func TestCreateEnvVars(t *testing.T) {
 			match := reflect.DeepEqual(res, tc.expected)
 
 			if match && !tc.shouldMatch || !match && tc.shouldMatch {
-				t.Errorf("expected %v, have %v", res, tc.expected)
+				t.Errorf("expected %v, have %v", tc.expected, res)
 			}
 		})
 	}
