@@ -46,6 +46,7 @@ clean:
 .PHONY: build
 build: 
 	@echo "Building binaries"
+	mkdir -p ${BINDIR}
 	${FLAGS} go build -buildvcs=true -o ${BINDIR} ${SOURCES}
 
 .PHONY: generate

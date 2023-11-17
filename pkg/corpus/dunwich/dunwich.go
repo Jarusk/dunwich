@@ -2,7 +2,6 @@ package dunwich
 
 import (
 	_ "embed"
-	"errors"
 	"fmt"
 	"log/slog"
 	"strings"
@@ -84,7 +83,7 @@ func GetNumSegments() int {
 
 func GetSegment(id int) (*string, error) {
 	if id < 0 || id >= len(corpus) {
-		return nil, errors.New(fmt.Sprintf("index %d is not in range 0:%d", id, len(corpus)))
+		return nil, fmt.Errorf("index %d is not in range 0:%d", id, len(corpus))
 	}
 
 	return &corpus[id], nil
