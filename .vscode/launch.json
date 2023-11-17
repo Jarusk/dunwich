@@ -11,6 +11,14 @@
             "mode": "auto",
             "program": "${workspaceFolder}/cmd/dunwich/",
             "args": []
+        },
+        {
+            "name": "Launch Loader",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/loader/",
+            "args": []
         }
     ]
 }

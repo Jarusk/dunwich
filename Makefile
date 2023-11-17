@@ -1,6 +1,6 @@
 SOURCES := ./...
 BINARY := dunwich
-BINDIR := .
+BINDIR := out
 COVERAGE_REPORT := coverage.out
 
 FLAGS := CGO_ENABLED=0
@@ -25,6 +25,11 @@ check-coverage: test-coverage
 		exit 1;\
 	fi
 
+.PHONY: doc
+doc:
+	@echo "Start godoc"
+	godoc -http=:6060
+
 .PHONY: all
 all: clean fmt lint test build
 
@@ -33,15 +38,20 @@ all-noclean: fmt lint test build
 
 .PHONY: clean
 clean:
-	@echo "Removing $(BINARY) and coverage report"
-	@rm -f $(BINARY) $(COVERAGE_REPORT)
+	@echo "Removing $(BINDIR) and coverage report"
+	@rm -rf $(BINDIR) $(COVERAGE_REPORT)
 	@echo "Cleaning build and test cache"
 	@go clean -cache -testcache
 
 .PHONY: build
 build: 
-	@echo "Building ${BINARY}"
+	@echo "Building binaries"
 	${FLAGS} go build -buildvcs=true -o ${BINDIR} ${SOURCES}
+
+.PHONY: generate
+generate:
+	@echo "Generating source files"
+	${FLAGS} go generate ${SOURCES}
 
 .PHONY: fmt
 fmt:
