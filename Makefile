@@ -73,6 +73,11 @@ run:
 	@echo "Running ${BINARY}"
 	${FLAGS} go run -buildvcs=true ${SOURCES}
 
+.PHONY: bench
+bench:
+	@echo "Running benchs"
+	${FLAGS} CGO_ENABLED=1 go test -v -bench=. -benchmem -race ${SOURCES}
+
 .PHONY: test
 test:
 	@echo "Running tests"
