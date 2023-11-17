@@ -1,6 +1,6 @@
 module github.com/Jarusk/dunwich
 
-go 1.20
+go 1.21
 
 require (
 	github.com/carlmjohnson/versioninfo v0.22.5
