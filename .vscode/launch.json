@@ -13,12 +13,12 @@
             "args": []
         },
         {
-            "name": "Launch Loader",
+            "name": "Launch Simple Client",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}/cmd/loader/",
-            "args": []
+            "program": "${workspaceFolder}/cmd/dunwich/",
+            "args": ["d", "c"]
         }
     ]
 }
