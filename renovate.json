@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>Jarusk/renovate-config"
-  ]
+  ],
+  "packageRules": [
+    {
+    "matchManagers": ["gomod"],
+    "matchDepTypes": ["indirect"],
+    "groupName": "Go (Transitive Dependencies)",
+    "enabled": true
+  }
+]
 }
