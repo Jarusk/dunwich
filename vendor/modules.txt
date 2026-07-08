@@ -7,7 +7,7 @@ github.com/carlmjohnson/versioninfo
 # github.com/cpuguy83/go-md2man/v2 v2.0.4
 ## explicit; go 1.11
 github.com/cpuguy83/go-md2man/v2/md2man
-# github.com/google/btree v1.1.2
+# github.com/google/btree v1.1.3
 ## explicit; go 1.18
 github.com/google/btree
 # github.com/hashicorp/errwrap v1.1.0
@@ -16,25 +16,27 @@ github.com/hashicorp/errwrap
 # github.com/hashicorp/go-immutable-radix v1.3.1
 ## explicit
 github.com/hashicorp/go-immutable-radix
-# github.com/hashicorp/go-msgpack v0.5.5
-## explicit
-# github.com/hashicorp/go-msgpack/v2 v2.1.2
-## explicit; go 1.19
+# github.com/hashicorp/go-metrics v0.6.0
+## explicit; go 1.25
+github.com/hashicorp/go-metrics
+github.com/hashicorp/go-metrics/compat
+# github.com/hashicorp/go-msgpack/v2 v2.1.5
+## explicit; go 1.24.0
 github.com/hashicorp/go-msgpack/v2/codec
 # github.com/hashicorp/go-multierror v1.1.1
 ## explicit; go 1.13
 github.com/hashicorp/go-multierror
-# github.com/hashicorp/go-sockaddr v1.0.6
+# github.com/hashicorp/go-sockaddr v1.0.7
 ## explicit; go 1.19
 github.com/hashicorp/go-sockaddr
 # github.com/hashicorp/golang-lru v1.0.2
 ## explicit; go 1.12
 github.com/hashicorp/golang-lru/simplelru
-# github.com/hashicorp/memberlist v0.5.1
-## explicit; go 1.20
+# github.com/hashicorp/memberlist v0.6.0
+## explicit; go 1.25.0
 github.com/hashicorp/memberlist
-# github.com/miekg/dns v1.1.59
-## explicit; go 1.19
+# github.com/miekg/dns v1.1.72
+## explicit; go 1.24.0
 github.com/miekg/dns
 # github.com/russross/blackfriday/v2 v2.1.0
 ## explicit
@@ -45,37 +47,39 @@ github.com/sean-/seed
 # github.com/sirupsen/logrus v1.9.3
 ## explicit; go 1.13
 github.com/sirupsen/logrus
-# github.com/stretchr/testify v1.8.0
-## explicit; go 1.13
+# github.com/stretchr/testify v1.11.1
+## explicit; go 1.17
 # github.com/urfave/cli/v2 v2.27.2
 ## explicit; go 1.18
 github.com/urfave/cli/v2
 # github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1
 ## explicit; go 1.15
 github.com/xrash/smetrics
-# golang.org/x/mod v0.17.0
-## explicit; go 1.18
+# golang.org/x/mod v0.31.0
+## explicit; go 1.24.0
 golang.org/x/mod/semver
-# golang.org/x/net v0.25.0
-## explicit; go 1.18
+# golang.org/x/net v0.55.0
+## explicit; go 1.25.0
 golang.org/x/net/bpf
 golang.org/x/net/internal/iana
 golang.org/x/net/internal/socket
 golang.org/x/net/ipv4
 golang.org/x/net/ipv6
-# golang.org/x/sync v0.7.0
-## explicit; go 1.18
+# golang.org/x/sync v0.19.0
+## explicit; go 1.24.0
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.20.0
-## explicit; go 1.18
+# golang.org/x/sys v0.45.0
+## explicit; go 1.25.0
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/tools v0.21.0
-## explicit; go 1.19
+# golang.org/x/tools v0.40.0
+## explicit; go 1.24.0
+golang.org/x/tools/go/ast/edge
+golang.org/x/tools/go/ast/inspector
 golang.org/x/tools/go/gcexportdata
-golang.org/x/tools/go/internal/packagesdriver
 golang.org/x/tools/go/packages
 golang.org/x/tools/go/types/objectpath
+golang.org/x/tools/go/types/typeutil
 golang.org/x/tools/internal/aliases
 golang.org/x/tools/internal/event
 golang.org/x/tools/internal/event/core
@@ -86,6 +90,6 @@ golang.org/x/tools/internal/gocommand
 golang.org/x/tools/internal/packagesinternal
 golang.org/x/tools/internal/pkgbits
 golang.org/x/tools/internal/stdlib
-golang.org/x/tools/internal/tokeninternal
+golang.org/x/tools/internal/typeparams
 golang.org/x/tools/internal/typesinternal
 golang.org/x/tools/internal/versions
