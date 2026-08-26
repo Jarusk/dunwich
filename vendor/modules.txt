@@ -16,8 +16,6 @@ github.com/hashicorp/errwrap
 # github.com/hashicorp/go-immutable-radix v1.3.1
 ## explicit
 github.com/hashicorp/go-immutable-radix
-# github.com/hashicorp/go-msgpack v0.5.5
-## explicit
 # github.com/hashicorp/go-msgpack/v2 v2.1.2
 ## explicit; go 1.19
 github.com/hashicorp/go-msgpack/v2/codec
@@ -42,11 +40,11 @@ github.com/russross/blackfriday/v2
 # github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529
 ## explicit
 github.com/sean-/seed
-# github.com/sirupsen/logrus v1.9.3
-## explicit; go 1.13
+# github.com/sirupsen/logrus v1.10.2
+## explicit; go 1.23
 github.com/sirupsen/logrus
-# github.com/stretchr/testify v1.8.0
-## explicit; go 1.13
+# github.com/stretchr/testify v1.12.1
+## explicit; go 1.17
 # github.com/urfave/cli/v2 v2.27.2
 ## explicit; go 1.18
 github.com/urfave/cli/v2
