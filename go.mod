@@ -1,11 +1,11 @@
 module github.com/Jarusk/dunwich
 
-go 1.21
+go 1.23
 
 require (
 	github.com/carlmjohnson/versioninfo v0.22.5
 	github.com/hashicorp/memberlist v0.5.1
-	github.com/sirupsen/logrus v1.9.3
+	github.com/sirupsen/logrus v1.10.2
 	github.com/urfave/cli/v2 v2.27.2
 )
 
@@ -22,7 +22,7 @@ require (
 	github.com/miekg/dns v1.1.59 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529 // indirect
-	github.com/stretchr/testify v1.8.0 // indirect
+	github.com/stretchr/testify v1.12.1 // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.25.0 // indirect
